@@ -104,7 +104,8 @@ sub getHTML{
     my $response = $ua->get($url);
     if($response->is_success){
         my $html = $response->content;
-        return Encode::is_utf8($html) ? $html : decode("gbk", $html);    
+        # return Encode::is_utf8($html) ? $html : decode("gbk", $html);    
+        return decode("gbk", $html);
     }
 }
 
@@ -184,10 +185,11 @@ sub printStatistic{
     my $summary   = ["","","","","","","","","","","","","","","","","","","","",""];
     # 排序从-10到10
     for my $stock (@_){
-        my $mktcap = int($stock->{mktcap}/500000 + 1)*50;
+        my $mktcap = int($stock->{mktcap}/(50*10000) + 1)*50;
         $mktcap = int($mktcap/1000 + 1)*1000 if $mktcap > 1000;
         $mktcap = '+5000' if $mktcap > 5000;
-        my $change = int($stock->{changepercent} + 10.05);
+        my $change = int($stock->{changepercent} + 10);
+        $change = 20 if $change > 20;
         unless($statistic->{$mktcap}){
             $statistic->{$mktcap} = ["","","","","","","","","","",".","","","","","","","","","",""];
         }
