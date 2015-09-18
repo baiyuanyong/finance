@@ -1,1 +1,3 @@
-# finance
+# Finance
+
+## sinastock.bat
