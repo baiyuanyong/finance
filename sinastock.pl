@@ -224,7 +224,7 @@ sub printSearchList{
 
         my @tmp = split /,/, $1;
         my ($code) = $stock =~ /(\d+)=/;
-        printf "%s\t",             $tmp[0]; 
+        printf "%-6s\t",             $tmp[0]; 
         if($tmp[1] == 0){
             printf "%8s\n", '--.--';
             printf "( %s )%s\n\n",   $code, '-'x80;
